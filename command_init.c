@@ -70,7 +70,11 @@ static void	handle_token_type(t_cmd *node, t_token **tokens)
 	else if ((*tokens)->type == TOKEN_REDIRECT_IN
 		|| (*tokens)->type == TOKEN_REDIRECT_OUT
 		|| (*tokens)->type == TOKEN_REDIRECT_APPEND)
+	{
 		handle_redirects(node, *tokens);
+		if (*tokens && (*tokens)->next)
+			*tokens = (*tokens)->next;
+	}
 	else if ((*tokens)->type == TOKEN_HEREDOC)
 	{
 		add_heredoc(node, *tokens);
@@ -104,9 +108,11 @@ t_cmd	*adding_command(t_token *tokens, t_shell *shell)
 			node = command_init(&shell, &shell->cmds);
 		if (!node)
 			return (NULL);
-		shell->cmds->argc++;
+		if (shell->cmds)
+			shell->cmds->argc++;
 		node = process_token(node, &tokens, shell);
-		tokens = tokens->next;
+		if (tokens)
+			tokens = tokens->next;
 	}
 	return (shell->cmds);
 }

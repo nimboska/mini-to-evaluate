@@ -6,7 +6,7 @@
 /*   By: ochmurzy <ochmurzy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 21:14:06 by ochmurzy          #+#    #+#             */
-/*   Updated: 2025/10/30 17:43:20 by ochmurzy         ###   ########.fr       */
+/*   Updated: 2025/11/10 20:51:09 by ochmurzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static void	add_redir(t_cmd *cmd, const char *path, int append)
 void	handle_redirects(t_cmd *command, t_token *tokens)
 {
 	if (!tokens->next || tokens->next->type != TOKEN_WORD)
+	{
 		write(2, "Error: Wrong use of redirections :(\n", 36);
+		return ;
+	}
 	if (tokens->type == TOKEN_REDIRECT_IN)
 	{
 		if (command->infile)

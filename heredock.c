@@ -6,7 +6,7 @@
 /*   By: ochmurzy <ochmurzy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:30:40 by ochmurzy          #+#    #+#             */
-/*   Updated: 2025/10/28 17:02:45 by ochmurzy         ###   ########.fr       */
+/*   Updated: 2025/11/10 20:35:29 by ochmurzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,10 @@ void	add_heredoc(t_cmd *cmd, t_token *delim)
 	t_heredoc	*new_hrdc;
 
 	if (!delim || !delim->next || !delim->next->value)
+	{
+		write(2, "Error: Wrong use of heredoc :(\n", 31);
 		return ;
+	}
 	new_hrdc = (t_heredoc *)malloc(sizeof(t_heredoc) * (cmd->heredoc_cnt + 1));
 	if (!new_hrdc)
 		return (perror("malloc fail"));

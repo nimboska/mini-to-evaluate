@@ -6,7 +6,7 @@
 /*   By: ochmurzy <ochmurzy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 20:12:50 by ochmurzy          #+#    #+#             */
-/*   Updated: 2025/10/22 18:15:07 by ochmurzy         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:59:58 by ochmurzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static void	set_input(t_cmd *cmd)
 		return ;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
+	{	
 		perror(path);
+		exit(127);
+	}
 	else
 	{
 		dup2(fd, STDIN_FILENO);

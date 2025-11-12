@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochmurzy <ochmurzy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokon <mokon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:30:40 by ochmurzy          #+#    #+#             */
-/*   Updated: 2025/11/10 20:35:29 by ochmurzy         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:19:41 by mokon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,7 @@ void	add_heredoc(t_cmd *cmd, t_token *delim)
 	}
 	new_hrdc[cmd->heredoc_cnt].delim = ft_strdup(delim->next->value);
 	if (!new_hrdc[cmd->heredoc_cnt].delim)
-	{
-		free(new_hrdc);
-		return (perror("malloc fail"));
-	}
+		return (free(new_hrdc), perror("malloc fail"));
 	new_hrdc[cmd->heredoc_cnt].tmp_path = NULL;
 	read_to_file(&new_hrdc[cmd->heredoc_cnt]);
 	cmd->heredocs = new_hrdc;
